@@ -1,0 +1,13 @@
+h1 {
+  margin: 0;
+  padding:0;
+}
+
+.logo-left {
+  color: #ff0000;
+  font-weight: 900;
+}
+
+.logo-right {
+  font-weight: bold;
+}

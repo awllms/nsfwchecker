@@ -1,0 +1,38 @@
+input[type=text] {
+  padding: 20px 0;
+  padding-left: 90px;
+  margin: 20px 0 8px;
+  width: 100%;
+  border: 1px solid #D3D3D3;
+  border-radius: 5px;
+  font-size: 1.88rem;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px #D3D3D3;
+}
+
+input[type=text]::placeholder {
+  color: #D3D3D3;
+}
+
+input[type=text]:focus {
+  box-shadow: 0 1px 25px #D3D3D3;
+  outline: none;
+}
+
+.search-container {
+  margin-bottom: 60px;
+}
+
+.form-span {
+  font-weight: bold;
+}
+
+.search-icon {
+  position: relative;
+}
+
+.search-icon img {
+  position: absolute;
+  margin-top: 39px;
+  margin-left: 25px;
+}

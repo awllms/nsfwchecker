@@ -1,12 +1,16 @@
 import React from 'react';
+import alert from './alert-icon-red.png';
+// import approved from './approved-icon-green.png';
+// import error from './error-icon-red.png';
+import './ResponseNotifier.css';
 
 const ResponseNotifier = () => {
   return (
-    <section>
+    <section className='response-section'>
       <div>
-        <p>Icon Place Holder</p>
+        <img alt='' src={alert} width='80' height='auto' />
       </div>
-      <div>
+      <div className='response-text'>
         <p>That page displays images that might not be safe work.</p>
       </div>
     </section>
