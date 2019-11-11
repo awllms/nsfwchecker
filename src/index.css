@@ -44,3 +44,22 @@ code {
 header {
   margin-top: 150px;
 }
+
+footer {
+  margin-top: 150px;
+}
+
+footer span {
+  color: #808080;
+  font-size: .7rem;
+  padding-bottom: 10px;
+}
+
+footer span a {
+  color: #808080;
+  font-weight: bold;
+  text-decoration: none;
+}
+footer span a:hover {
+  color: black;
+}

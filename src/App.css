@@ -10,8 +10,6 @@
 .main-container {
   width: 550px;
   margin: 0 auto;
-  /* opacity: 0;
-  transition: 2s opacity; */
 }
 
 .fadeOut {
@@ -27,6 +25,7 @@
 
 .loading-spin {
   position: relative;
+  margin-bottom: 60px;
 }
 
 .loading-spin div svg {

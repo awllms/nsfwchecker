@@ -13,7 +13,8 @@ const initialState = {
   answer: '',
   description: '',
   hasResponse: false,
-  loading: false
+  loading: false,
+  imageUrl: ''
 }
 
 class App extends React.Component {
@@ -24,7 +25,8 @@ class App extends React.Component {
       answer: '',
       description: '',
       hasResponse: false,
-      loading: false
+      loading: false,
+      imageUrl: ''
     }
   }
 
@@ -35,9 +37,30 @@ class App extends React.Component {
     });
   }
 
-  onInputChange = (event) => {
-    this.setState({input: event.target.value });
+  onURLChange = (data) => {
+    if (!(data.target.value.includes('https://') || data.target.value.includes('http://') || data.target.value.includes('www.'))) {
+      this.setState({input: 'http://www.' + data.target.value})
+    } else if (data.target.value.includes('https://') && !(data.target.value.includes('www.'))) {
+      this.setState({input: 'http://www.' + data.target.value.slice(8)})
+    } else if (data.target.value.includes('http://') && !(data.target.value.includes('www.'))) {
+      this.setState({input: 'http://www.' + data.target.value.slice(7)})
+    } else if (data.target.value.includes('www.') && !(data.target.value.includes('https://') || data.target.value.includes('http://'))) {
+      this.setState({input: 'http://' + data.target.value })
+    }
+    else {
+      this.setState({input: data.target.value})
+    }
   }
+
+  // else if (!(this.state.input.includes('https://') || this.state.input.includes('http://'))) {
+  //     this.setState({input: 'http://' + data.target.value})
+  //   }
+
+
+  onInputChange = (event) => {
+        this.onURLChange(event)
+        console.log(this.state.input)
+      }
 
   onButtonSubmit = (event) => {
     if (event.key === 'Enter') {
@@ -52,7 +75,8 @@ class App extends React.Component {
       .then(decision => {
         this.setState({
           hasResponse: true,
-          loading: false})
+          loading: false,
+          imageUrl: this.state.input})
         this.loadDecision(decision)
       })
     }
@@ -65,7 +89,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        
         <div className='main-container'>
           <FadeIn>
             <Logo />
@@ -82,6 +105,7 @@ class App extends React.Component {
                 description={this.state.description}
                 hasResponse={this.state.hasResponse}
                 onNewSearch={this.onNewSearch}
+                imageUrl={this.state.imageUrl}
               />
             </FadeIn> :
             <div> 
@@ -91,10 +115,10 @@ class App extends React.Component {
                   onInputChange={this.onInputChange} 
                   onButtonSubmit={this.onButtonSubmit}
                 />
+                <Footer />
               </FadeIn>
             </div>
           }
-          {/*<Footer /> */}
         </div>
       </div>
     );

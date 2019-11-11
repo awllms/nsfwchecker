@@ -5,7 +5,7 @@
 
 .response-text {
   font-size: 1.5rem;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 
 .response-new-search {
@@ -14,11 +14,37 @@
 
 .response-new-search p {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.response-new-search p:hover {
+/* .response-new-search p:hover {
   cursor: pointer;
   color: #d3d3d3;
+} */
+
+.response-new-search a {
+  text-decoration: none;
+  color: #808080;
+}
+
+.response-new-search a:hover {
+  text-decoration: none;
+  color: #d3d3d3;
+}
+
+.new-search-button {
+  background: black;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  padding: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.new-search-button:hover {
+  background:#ff0000;
 }
 
 
