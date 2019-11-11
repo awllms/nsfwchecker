@@ -16,7 +16,7 @@ const ResponseNotifier = ({answer, description, hasResponse, onNewSearch}) => {
   }
 
   return (
-    <section className={"response-section " + (hasResponse ? "fadeIn" : "fadeOut")}>
+    <section className="response-section">
       <div>
         <img alt='' src={answerIcon} width='80' height='auto' />
       </div>
