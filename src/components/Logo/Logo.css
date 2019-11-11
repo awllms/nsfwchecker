@@ -3,6 +3,11 @@ h1 {
   padding:0;
 }
 
+header h1 img {
+  max-width: 100%;
+  height: auto;
+}
+
 .logo-left {
   color: #ff0000;
   font-weight: 900;

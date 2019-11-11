@@ -10,6 +10,35 @@
 .main-container {
   width: 550px;
   margin: 0 auto;
+  /* opacity: 0;
+  transition: 2s opacity; */
+}
+
+.fadeOut {
+  opacity:0;
+  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+
+}
+.fadeIn {
+  opacity:1;
+  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+
+}
+
+.loading-spin {
+  position: relative;
+}
+
+.loading-spin div svg {
+  position: absolute;
+  margin-top: 15px;
+  width: 64px;
+  height: auto;
+  left: 44%;
+}
+
+.loading-spin p {
+  margin-top: 50px;
 }
 
 .center {
@@ -31,3 +60,22 @@
 .App-link {
   color: #09d3ac;
 }
+
+@media only screen and (max-width: 600px) {
+  .main-container {
+    width: 80%;
+  }
+
+  input[type=text] {
+    font-size: 1.55rem;
+  }
+
+  .search-icon img {
+    margin-top: 35px;
+  }
+
+  .loading-spin div svg {
+    left: 42%;
+  }
+}
+
