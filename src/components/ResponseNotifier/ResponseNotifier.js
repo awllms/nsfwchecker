@@ -1,7 +1,7 @@
 import React from 'react';
 import alertIcon from './alert-icon-red.png';
 import approvedIcon from './approved-icon-green.png';
-import errorIcon from './error-icon-red.png';
+import errorIcon from './error-icon-yellow.png';
 import './ResponseNotifier.css';
 
 const ResponseNotifier = ({answer, description, onNewSearch, imageUrl}) => {

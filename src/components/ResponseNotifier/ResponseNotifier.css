@@ -33,7 +33,7 @@
 }
 
 .new-search-button {
-  background: black;
+  background: #ff0000;
   color: white;
   font-weight: bold;
   border: none;
@@ -44,7 +44,7 @@
 }
 
 .new-search-button:hover {
-  background:#ff0000;
+  background: black;
 }
 
 
