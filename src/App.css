@@ -76,5 +76,13 @@
   .loading-spin div svg {
     left: 42%;
   }
+
+  .response-text {
+    font-size: 1.3rem;
+  }
+  
+  .response-new-search img {
+    width: 80%;
+  }
 }
 
