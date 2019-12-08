@@ -4,7 +4,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer>
-      <span>Built by <a href="antcodess.com">antcodess</a></span>
+      <span>&copy; 2019 NSFWchecker</span>
     </footer>
   )
 }
