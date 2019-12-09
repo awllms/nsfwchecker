@@ -26,7 +26,8 @@ class App extends React.Component {
       description: '',
       hasResponse: false,
       loading: false,
-      imageUrl: ''
+      imageUrl: '',
+      serverError: false
     }
   }
 
@@ -38,34 +39,32 @@ class App extends React.Component {
   }
 
   onURLChange = (data) => {
-    if (!(data.target.value.includes('https://') || data.target.value.includes('http://') || data.target.value.includes('www.'))) {
-      this.setState({input: 'http://www.' + data.target.value})
-    } else if (data.target.value.includes('https://') && !(data.target.value.includes('www.'))) {
-      this.setState({input: 'http://www.' + data.target.value.slice(8)})
-    } else if (data.target.value.includes('http://') && !(data.target.value.includes('www.'))) {
-      this.setState({input: 'http://www.' + data.target.value.slice(7)})
-    } else if (data.target.value.includes('www.') && !(data.target.value.includes('https://') || data.target.value.includes('http://'))) {
-      this.setState({input: 'http://' + data.target.value })
+    const value = data.target.value;
+    if (!(value.includes('https://') || value.includes('http://') || value.includes('www.'))) {
+      this.setState({input: 'http://www.' + value})
+    } else if (value.includes('https://') && !(value.includes('www.'))) {
+      this.setState({input: 'http://www.' + value.slice(8)})
+    } else if (value.includes('http://') && !(value.includes('www.'))) {
+      this.setState({input: 'http://www.' + value.slice(7)})
+    } else if (value.includes('www.') && !(value.includes('https://') || value.includes('http://'))) {
+      this.setState({input: 'http://' + value })
     }
     else {
-      this.setState({input: data.target.value})
+      this.setState({input: value})
     }
   }
 
-  // else if (!(this.state.input.includes('https://') || this.state.input.includes('http://'))) {
-  //     this.setState({input: 'http://' + data.target.value})
-  //   }
-
-
   onInputChange = (event) => {
-        this.onURLChange(event)
-        console.log(this.state.input)
-      }
+    this.onURLChange(event)
+    this.setState((state) => {
+      console.log(state.input)
+    })
+  }
 
   onButtonSubmit = (event) => {
     if (event.key === 'Enter') {
       this.setState({loading: true })
-      fetch('http://localhost:3001/check', {
+      fetch('https://nsfwcheckerapi.herokuapp.com/check', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -76,8 +75,17 @@ class App extends React.Component {
         this.setState({
           hasResponse: true,
           loading: false,
-          imageUrl: this.state.input})
+          imageUrl: this.state.input
+        })
         this.loadDecision(decision)
+      }).catch(error => {
+        this.setState({
+          answer: 'error',
+          description: 'There was an error. Please try again later.',
+          hasResponse: true,
+          loading: false,
+          imageUrl: this.state.input
+        })
       })
     }
   }
@@ -98,7 +106,8 @@ class App extends React.Component {
               <ReactLoading type={"spin"} color={"red"} />
               <p>Checking. This may take a few moments...</p>
             </div>
-            : this.state.hasResponse ?
+            : 
+            this.state.hasResponse ?
             <FadeIn>
               <ResponseNotifier
                 answer={this.state.answer}
@@ -107,7 +116,8 @@ class App extends React.Component {
                 onNewSearch={this.onNewSearch}
                 imageUrl={this.state.imageUrl}
               />
-            </FadeIn> :
+            </FadeIn> 
+            :
             <div> 
               <FadeIn>
                 <Tagline />
