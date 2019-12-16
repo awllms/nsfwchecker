@@ -4,7 +4,7 @@ import approvedIcon from './approved-icon-green.png';
 import errorIcon from './error-icon-yellow.png';
 import './ResponseNotifier.css';
 
-const ResponseNotifier = ({answer, description, onNewSearch, imageUrl}) => {
+const ResponseNotifier = ({ answer, description, onNewSearch, imageUrl }) => {
   
   let answerIcon;
   if (answer === 'nsfw') {

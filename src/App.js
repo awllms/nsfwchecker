@@ -39,7 +39,7 @@ const App = () => {
           body: JSON.stringify({
             check: input
           })
-        })
+        });
         const decision = await response.json();
         setAppState({...appState, ...decision, hasResponse: true, loading: false, imageUrl: input })
       } catch(error) {
@@ -51,7 +51,7 @@ const App = () => {
           loading: false,
           imageUrl: input,
           serverError: true
-        })
+        });
       }
     }
 
@@ -59,12 +59,12 @@ const App = () => {
       fetchAnswer('https://nsfwcheckerapi.herokuapp.com/check')
       setIsFetching(false)
     }
-    console.log(appState)
-    console.log(isFetching)
+
   }, [isFetching, appState, input]);
 
   const onURLChange = (data) => {
     const value = data.target.value;
+    
     if (!(value.includes('https://') || value.includes('http://') || value.includes('www.'))) {
       setAppState({...appState, input: 'http://www.' + value})
     } else if (value.includes('https://') && !(value.includes('www.'))) {
