@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FadeIn from "react-fade-in";
 import ReactLoading from "react-loading";
 import Logo from './components/Logo/Logo';
@@ -8,131 +8,129 @@ import ResponseNotifier from './components/ResponseNotifier/ResponseNotifier';
 import Footer from './components/Footer/Footer';
 import './App.css';
 
-const initialState = {
+const INITIAL_STATE = {
   input: '',
   answer: '',
   description: '',
   hasResponse: false,
   loading: false,
-  imageUrl: ''
-}
+  imageUrl: '',
+  serverError: false
+};
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      input: '',
-      answer: '',
-      description: '',
-      hasResponse: false,
-      loading: false,
-      imageUrl: '',
-      serverError: false
-    }
-  }
+const App = () => {
+  const [appState, setAppState] = useState(INITIAL_STATE);
+  const [isFetching, setIsFetching] = useState(false);
+  const { 
+    input, 
+    answer, 
+    description, 
+    hasResponse, 
+    loading, 
+    imageUrl } = appState;
 
-  loadDecision = (data) => {
-    this.setState({
-      answer: data.answer,
-      description: data.description
-    });
-  }
-
-  onURLChange = (data) => {
-    const value = data.target.value;
-    if (!(value.includes('https://') || value.includes('http://') || value.includes('www.'))) {
-      this.setState({input: 'http://www.' + value})
-    } else if (value.includes('https://') && !(value.includes('www.'))) {
-      this.setState({input: 'http://www.' + value.slice(8)})
-    } else if (value.includes('http://') && !(value.includes('www.'))) {
-      this.setState({input: 'http://www.' + value.slice(7)})
-    } else if (value.includes('www.') && !(value.includes('https://') || value.includes('http://'))) {
-      this.setState({input: 'http://' + value })
-    }
-    else {
-      this.setState({input: value})
-    }
-  }
-
-  onInputChange = (event) => {
-    this.onURLChange(event)
-    this.setState((state) => {
-      console.log(state.input)
-    })
-  }
-
-  onButtonSubmit = (event) => {
-    if (event.key === 'Enter') {
-      this.setState({loading: true })
-      fetch('https://nsfwcheckerapi.herokuapp.com/check', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        check: this.state.input
-      })
-    }).then(response => response.json())
-      .then(decision => {
-        this.setState({
-          hasResponse: true,
-          loading: false,
-          imageUrl: this.state.input
+  useEffect(() => {
+    async function fetchAnswer(url) {
+      try {
+        setAppState({...appState, loading: true })
+        const response = await fetch(url, {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            check: input
+          })
         })
-        this.loadDecision(decision)
-      }).catch(error => {
-        this.setState({
+        const decision = await response.json();
+        setAppState({...appState, ...decision, hasResponse: true, loading: false, imageUrl: input })
+      } catch(error) {
+        setAppState({
+          ...appState,
           answer: 'error',
           description: 'There was an error. Please try again later.',
           hasResponse: true,
           loading: false,
-          imageUrl: this.state.input
+          imageUrl: input,
+          serverError: true
         })
-      })
+      }
     }
+
+    if (isFetching) {
+      fetchAnswer('https://nsfwcheckerapi.herokuapp.com/check')
+      setIsFetching(false)
+    }
+    console.log(appState)
+    console.log(isFetching)
+  }, [isFetching, appState, input]);
+
+  const onURLChange = (data) => {
+    const value = data.target.value;
+    if (!(value.includes('https://') || value.includes('http://') || value.includes('www.'))) {
+      setAppState({...appState, input: 'http://www.' + value})
+    } else if (value.includes('https://') && !(value.includes('www.'))) {
+      setAppState({...appState, input: 'https://www.' + value.slice(8)})
+    } else if (value.includes('http://') && !(value.includes('www.'))) {
+      setAppState({...appState, input: 'http://www.' + value.slice(7)})
+    } else if (value.includes('www.') && !(value.includes('https://') || value.includes('http://'))) {
+      setAppState({...appState, input: 'http://' + value })
+    }
+    else {
+      setAppState({...appState, input: value})
+    }
+  };
+
+  const onInputChange = (event) => {
+    onURLChange(event);
   }
 
-  onNewSearch = () => {
-    this.setState(initialState);
-  }
+  const onButtonSubmit = (event) => {
+    if (event.key === 'Enter') {
+      setIsFetching(true)
+    }
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <div className='main-container'>
+  const onNewSearch = () => {
+    setAppState(INITIAL_STATE);
+  };
+
+  return (
+    <div className="App">
+      <div className='main-container'>
+        <FadeIn>
+          <Logo />
+        </FadeIn>
+        {loading ?
+          <div className='loading-spin'>
+            <ReactLoading type={"spin"} color={"red"} />
+            <p>Checking. This may take a few moments...</p>
+          </div>
+          : 
+          hasResponse ?
           <FadeIn>
-            <Logo />
-          </FadeIn>
-          {this.state.loading ?
-            <div className='loading-spin'>
-              <ReactLoading type={"spin"} color={"red"} />
-              <p>Checking. This may take a few moments...</p>
-            </div>
-            : 
-            this.state.hasResponse ?
+            <ResponseNotifier
+              answer={answer}
+              description={description}
+              hasResponse={hasResponse}
+              onNewSearch={onNewSearch}
+              imageUrl={imageUrl}
+            />
+          </FadeIn> 
+          :
+          <div> 
             <FadeIn>
-              <ResponseNotifier
-                answer={this.state.answer}
-                description={this.state.description}
-                hasResponse={this.state.hasResponse}
-                onNewSearch={this.onNewSearch}
-                imageUrl={this.state.imageUrl}
+              <Tagline />
+              <UrlInputForm 
+                onInputChange={onInputChange} 
+                onButtonSubmit={onButtonSubmit}
               />
-            </FadeIn> 
-            :
-            <div> 
-              <FadeIn>
-                <Tagline />
-                <UrlInputForm 
-                  onInputChange={this.onInputChange} 
-                  onButtonSubmit={this.onButtonSubmit}
-                />
-                <Footer />
-              </FadeIn>
-            </div>
-          }
-        </div>
+              <Footer />
+            </FadeIn>
+          </div>
+        }
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 
 export default App;
