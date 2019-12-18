@@ -3,10 +3,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .main-container {
   width: 550px;
   margin: 0 auto;
@@ -45,21 +41,6 @@
   justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}
-
 @media only screen and (max-width: 600px) {
   .main-container {
     width: 80%;
@@ -84,5 +65,22 @@
   .response-new-search img {
     width: 80%;
   }
+  
+}
+
+@media only screen and (max-width: 499px) {
+
+  input[type=text] {
+    font-size: 1.20rem;
+    padding-top: 22px;
+    padding-left: 60px;
+  }
+
+  .search-icon img {
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 30px;
+  }
+
 }
 

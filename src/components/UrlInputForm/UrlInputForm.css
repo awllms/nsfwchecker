@@ -36,4 +36,6 @@ input[type=text]:focus {
   position: absolute;
   margin-top: 39px;
   margin-left: 25px;
+  width: 40px; 
+  height: auto;
 }

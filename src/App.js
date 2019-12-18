@@ -56,8 +56,8 @@ const App = () => {
     }
 
     if (isFetching) {
-      fetchAnswer('https://nsfwcheckerapi.herokuapp.com/check')
-      setIsFetching(false)
+      fetchAnswer('https://nsfwcheckerapi.herokuapp.com/check');
+      setIsFetching(false);
     }
 
   }, [isFetching, appState, input]);
