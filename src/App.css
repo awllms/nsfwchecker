@@ -68,7 +68,7 @@
   
 }
 
-@media only screen and (max-width: 499px) {
+@media only screen and (max-width: 450px) {
 
   input[type=text] {
     font-size: 1.20rem;
