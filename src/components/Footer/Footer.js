@@ -4,7 +4,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer>
-      <span>&copy; 2019 NSFWchecker</span>
+      <span>&copy; 2020 NSFWchecker</span>
     </footer>
   )
 }
