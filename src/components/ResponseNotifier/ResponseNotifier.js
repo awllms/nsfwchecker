@@ -25,7 +25,15 @@ const ResponseNotifier = ({ answer, description, onNewSearch, imageUrl }) => {
       </div>
       {answer === 'sfw' ? 
         <div className="response-new-search">
-          <p>url:</p><a href={imageUrl} target='_blank' rel="noopener noreferrer">{imageUrl}</a>
+          <p className="response-new-search-url">url:</p>
+          <a href={imageUrl} target='_blank' rel="noopener noreferrer">
+            {imageUrl}
+          </a>
+          <p className="response-new-search-text">
+            <span className="response-new-search-text-bold">Disclaimer: </span>Each website displays images differently and can return 
+            safe-for-work if our checker can’t pick them up. <span className="response-new-search-text-bold">Please visit each URL with caution. </span> 
+            We are constantly making improvements to our search criteria daily to provide more accurate results.
+          </p>
         </div> 
       : <div>
         </div> }

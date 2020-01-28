@@ -63,8 +63,12 @@ const App = () => {
   }, [isFetching, appState, input]);
 
   const onURLChange = (data) => {
-    const value = data.target.value;
+    let value = data.target.value;
     
+    if (value.endsWith('/')) {
+      value = value.slice(0, -1);
+    }
+
     if (!(value.includes('https://') || value.includes('http://') || value.includes('www.'))) {
       setAppState({...appState, input: 'http://www.' + value})
     } else if (value.includes('https://') && !(value.includes('www.'))) {
@@ -116,17 +120,19 @@ const App = () => {
             />
           </FadeIn> 
           :
-          <div> 
+          <React.Fragment>
             <FadeIn>
               <Tagline />
               <UrlInputForm 
                 onInputChange={onInputChange} 
                 onButtonSubmit={onButtonSubmit}
               />
-              <Footer />
             </FadeIn>
-          </div>
+          </React.Fragment>
         }
+        <FadeIn>
+          <Footer />
+        </FadeIn>
       </div>
     </div>
   );

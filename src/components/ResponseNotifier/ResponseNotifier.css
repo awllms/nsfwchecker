@@ -9,19 +9,24 @@
 }
 
 .response-new-search {
-  margin-top: 50px;
+  margin-top: 30px;
   text-align: center;
 }
 
-.response-new-search p {
+.response-new-search-url {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-/* .response-new-search p:hover {
-  cursor: pointer;
-  color: #d3d3d3;
-} */
+.response-new-search-text {
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 20px 0;
+}
+
+.response-new-search-text-bold {
+  font-weight: bold;
+}
 
 .response-new-search a {
   text-decoration: none;
@@ -47,5 +52,3 @@
 .new-search-button:hover {
   background: black;
 }
-
-
