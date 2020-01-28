@@ -41,7 +41,7 @@ const ResponseNotifier = ({ answer, description, onNewSearch, imageUrl }) => {
         <button className="new-search-button" onClick={onNewSearch}>New Search</button>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ResponseNotifier
+export default ResponseNotifier;

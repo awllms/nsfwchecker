@@ -6,7 +6,7 @@ const Tagline = () => {
     <div className='tagline'>
       <p>Search any webpage & see if it displays NSFW images.</p>
     </div>
-  )
-}
+  );
+};
 
-export default Tagline
+export default Tagline;

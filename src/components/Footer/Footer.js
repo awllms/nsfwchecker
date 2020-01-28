@@ -6,7 +6,7 @@ const Footer = () => {
     <footer>
       <span>&copy; 2020 NSFWchecker</span>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
