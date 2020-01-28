@@ -1,3 +1,3 @@
 ## NSFWchecker
 
-Search any webpage & see if it displays NSFW images.
+Search any website & see if it displays NSFW images.
